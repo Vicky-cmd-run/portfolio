@@ -1,0 +1,285 @@
+.section-header {
+    margin-bottom: 60px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.card-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--neon);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* Profile Card */
+.about-profile-card {
+    grid-column: 1 / -1;
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+}
+
+.profile-avatar {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--neon), var(--purple), var(--neon));
+    animation: spin 4s linear infinite;
+    opacity: 0.4;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.avatar-letters {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #000;
+    z-index: 1;
+}
+
+.profile-info h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.profile-role {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+
+.profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.profile-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.chip-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chip-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.profile-chip:hover {
+    color: var(--neon);
+    border-color: rgba(0, 242, 255, 0.3);
+}
+
+/* Education */
+.edu-card {
+    border-radius: var(--radius);
+    padding: 28px;
+}
+
+.edu-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.edu-item:last-child {
+    margin-bottom: 0;
+}
+
+.edu-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon);
+    opacity: 0.85;
+    padding-top: 2px;
+}
+
+.edu-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.edu-text h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.edu-text p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.edu-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.edu-chip {
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+}
+
+.edu-chip.gpa {
+    border-color: rgba(0, 242, 255, 0.2);
+    color: var(--neon);
+    background: rgba(0, 242, 255, 0.05);
+}
+
+/* Certifications */
+.cert-card {
+    border-radius: var(--radius);
+    padding: 28px;
+}
+
+.cert-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.cert-item:last-child {
+    margin-bottom: 0;
+}
+
+.cert-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon);
+}
+
+.cert-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.cert-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.cert-issuer {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+.cert-badge {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(0, 242, 255, 0.1);
+    color: var(--neon);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+}
+
+.cert-badge.elite {
+    background: rgba(112, 0, 255, 0.1);
+    color: #b47aff;
+    border-color: rgba(112, 0, 255, 0.2);
+}
+
+/* Skills */
+.skills-card {
+    border-radius: var(--radius);
+    padding: 28px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.skill-cat h5 {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+
+.skill-tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-links {
+        justify-content: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
