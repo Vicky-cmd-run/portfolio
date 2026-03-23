@@ -34,13 +34,47 @@ const CONTACT_LINKS = [
 export default function Contact() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
     const [sent, setSent] = useState(false)
+    const [isSending, setIsSending] = useState(false)
     const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setSent(true)
-        setTimeout(() => setSent(false), 4000)
-        setForm({ name: '', email: '', subject: '', message: '' })
+        const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+        
+        if (!accessKey) {
+            alert("Form is not configured. Missing Web3Forms access key.");
+            return;
+        }
+
+        setIsSending(true);
+
+        try {
+            const res = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    ...form
+                })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                setSent(true)
+                setTimeout(() => setSent(false), 4000)
+                setForm({ name: '', email: '', subject: '', message: '' })
+            } else {
+                alert(data.message || "Something went wrong! Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong! Please try again.");
+        } finally {
+            setIsSending(false);
+        }
     }
 
     return (
@@ -121,9 +155,10 @@ export default function Contact() {
                             className="btn-primary full-width"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.97 }}
+                            disabled={isSending}
                         >
-                            <span>{sent ? '✅ Message Sent!' : 'Send Message'}</span>
-                            {!sent && <span>→</span>}
+                            <span>{isSending ? 'Sending...' : sent ? '✅ Message Sent!' : 'Send Message'}</span>
+                            {!sent && !isSending && <span>→</span>}
                         </motion.button>
                     </motion.form>
                 </div>
