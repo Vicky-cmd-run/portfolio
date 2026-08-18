@@ -1,94 +1,118 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { Terminal, Cpu, CheckCircle2, Play, Flame } from 'lucide-react'
 import './Blog.css'
 
 const POSTS = {
+    biometric: {
+        tab: '🖐️ UIDAI Biometrics',
+        filename: 'contactless_biometrics_u2net.py',
+        title: 'Engineering Contactless Biometrics for UIDAI SITAA Challenge',
+        meta: '📅 2026 · Computer Vision, Anti-Spoofing, PyTorch',
+        content: [
+            { type: 'h4', text: 'The Core Challenge' },
+            { type: 'p', text: 'Contactless fingerprinting introduces severe variability in ambient illumination, background clutter, and 2D presentation attack vulnerability compared to traditional flatbed capacitive scanners.' },
+            {
+                type: 'code', lang: 'Python', file: 'vision_pipeline.py', code: `<span class="kw">class</span> <span class="cn">BiometricPipeline</span>:
+    <span class="kw">def</span> __init__(self):
+        self.yolo = YOLO(<span class="str">"yolov8n-hand.pt"</span>)
+        self.u2net = <span class="cn">U2NET</span>(in_ch=3, out_ch=1) <span class="cm"># Finger segmentation</span>
+        self.liveness_net = <span class="cn">LivenessCNN</span>()  <span class="cm"># 3D Presentation Attack</span>
+        
+    <span class="kw">def</span> extract_minutiae(self, frame):
+        bbox = self.yolo(frame)
+        segmented_finger = self.u2net(frame[bbox])
+        enhanced = ZeroDCE.enhance(segmented_finger) <span class="cm"># Illumination</span>
+        <span class="kw">return</span> MinutiaeExtractor.compute_eer(enhanced)` },
+            { type: 'h4', text: 'Key Innovations & Results' },
+            { type: 'ul', items: [
+                'Combined YOLO for region proposal with U²-Net to achieve an IoU of 0.92 on finger boundary delineation.',
+                'Utilized Zero-DCE and CLAHE normalization to ensure robust ridge contrast under harsh direct sunlight and extreme low-light environments.',
+                'Implemented 3D spatial landmark tracking via MediaPipe + CNN classifiers to prevent presentation spoof attacks, qualifying for Stage 2 of the national UIDAI challenge.'
+            ]},
+        ],
+        metrics: { label: 'Biometric Metrics', items: [['IoU Segmentation', '0.92', 92], ['Liveness Accuracy', '97.4%', 97.4], ['EER Baseline', '0.012', null]] },
+    },
     blackbox: {
-        tab: '🔓 Unlocking the Black Box',
-        filename: 'unlocking_the_black_box.py',
-        title: 'Post-Mortem: Unlocking the Black Box',
+        tab: '🔓 NASA C-MAPSS (XAI)',
+        filename: 'turbofan_rul_xai.py',
+        title: 'Explainable AI: NASA C-MAPSS Turbofan Degradation',
         meta: '📅 2025 · Explainable AI, Predictive Maintenance',
         content: [
-            { type: 'h4', text: 'Problem Statement' },
-            { type: 'p', text: 'Traditional black-box models offered high accuracy but zero transparency. The challenge: build a model that could predict RUL of aircraft engines and explain why it made those predictions — critical in safety applications.' },
+            { type: 'h4', text: 'Problem Formulation' },
+            { type: 'p', text: 'Predicting Remaining Useful Life (RUL) on complex multivariate turbofan telemetry across 21 noisy sensors while providing human-interpretable explanations of physical degradation.' },
             {
-                type: 'code', lang: 'Python', file: 'model_architecture.py', code: `<span class="kw">class</span> <span class="cn">HybridRULModel</span>(nn.Module):
+                type: 'code', lang: 'Python', file: 'hybrid_xai_model.py', code: `<span class="kw">class</span> <span class="cn">HybridRULModel</span>(nn.Module):
     <span class="kw">def</span> __init__(self):
         self.cnn = <span class="cn">CNNEncoder</span>(filters=[64, 128, 256])
         self.transformer = <span class="cn">TransformerBlock</span>(d_model=256, heads=8)
         self.bilstm = nn.BiLSTM(256, 128, bidirectional=<span class="kw">True</span>)
-    <span class="kw">def</span> forward(self, x, explain=<span class="kw">False</span>):
-        features = self.cnn(x)
-        context = self.transformer(features) <span class="cm"># Temporal attention</span>
-        <span class="kw">return</span> self.bilstm(context)` },
-            { type: 'h4', text: 'Key Insights' },
-            { type: 'ul', items: ['SHAP revealed Sensor 11 (NF corrected fan speed) as most influential, aligning with domain knowledge.', 'Integrated Gradients showed the model prioritizes the last 30 cycles most heavily.', 'Hybrid architecture outperformed standalone CNN and LSTM baselines by 15-20% in RMSE.'] },
+        
+    <span class="kw">def</span> forward(self, x):
+        spatial = self.cnn(x)
+        temporal_ctx = self.transformer(spatial)
+        <span class="kw">return</span> self.bilstm(temporal_ctx)` },
+            { type: 'h4', text: 'Explainability & Insights' },
+            { type: 'ul', items: [
+                'SHAP attributions identified Sensor 11 (NF corrected fan speed) and Sensor 14 as primary drivers of sudden degradation.',
+                'Integrated Gradients revealed that the model places 65% of its decision weight on the final 30 run-to-failure cycles.',
+                'Achieved R² = 0.848 and RMSE of 14.60, outperforming conventional LSTM baselines.'
+            ]},
         ],
         metrics: { label: 'Model Performance', items: [['R² Score', '0.848', 84.8], ['Health State Acc.', '95%', 95], ['RMSE', '14.60', null], ['MAE', '12.09', null]] },
     },
-    exprai: {
-        tab: '😶 ExprAI',
-        filename: 'exprai_postmortem.py',
-        title: 'Post-Mortem: ExprAI — Face Emotion Recognition',
-        meta: '📅 2025 · Computer Vision, Transfer Learning',
-        content: [
-            { type: 'h4', text: 'Why DenseNet?' },
-            { type: 'p', text: 'After experimenting with VGG16, ResNet50, and EfficientNet, DenseNet201 emerged as the winner due to its dense connections that reuse feature maps — critical for capturing subtle micro-expressions.' },
-            {
-                type: 'code', lang: 'Python', file: 'training_config.py', code: `config = {
-    <span class="str">"model"</span>: <span class="str">"DenseNet201"</span>,
-    <span class="str">"base_lr"</span>: 1e-4,
-    <span class="str">"fine_tune_lr"</span>: 1e-5,
-    <span class="str">"dataset"</span>: <span class="str">"CK+"</span>, <span class="cm"># 8 emotion classes</span>
-    <span class="str">"epochs"</span>: 50,
-    <span class="str">"confidence_threshold"</span>: 0.7
-}` },
-            { type: 'h4', text: 'Results' },
-            { type: 'p', text: 'Confidence-based probability predictions for low-confidence outputs (contempt, fear) boosted accuracy on those classes by 12%, achieving 94.82% overall test accuracy.' },
-        ],
-        metrics: { label: 'Accuracy Metrics', items: [['Test Accuracy', '94.82%', 94.82], ['Training Accuracy', '98.88%', 98.88], ['Baseline Improvement', '+7-10%', null]] },
-    },
     mythra: {
-        tab: '📖 Mythra',
-        filename: 'mythra_architecture.md',
-        title: 'Post-Mortem: Mythra — Smart Cultural Storyteller',
-        meta: '📅 2025 · Generative AI, Multi-modal',
+        tab: '📖 Multimodal GenAI',
+        filename: 'multimodal_orchestration.py',
+        title: 'MYTHRA: Asynchronous Multimodal Story Generation',
+        meta: '📅 2025 · Generative AI, Latency Optimization',
         content: [
-            { type: 'h4', text: 'System Architecture' },
-            { type: 'p', text: 'Mythra orchestrates 4 AI components in a pipeline: LLM for narrative, diffusion model for scene images, a prompt synthesizer, and Neural TTS for audio — all async-coordinated.' },
+            { type: 'h4', text: 'Architecture & Visual Consistency' },
+            { type: 'p', text: 'Orchestrated a 3-stage generative pipeline: LLMs for narrative scene breakdowns &rarr; FLUX.1 diffusion for scene rendering &rarr; Sarvam AI Neural TTS for regional voice synthesis.' },
             {
-                type: 'code', lang: 'Python', file: 'mythra_pipeline.py', code: `<span class="kw">async def</span> generate_story(prompt: str):
-    narrative = <span class="kw">await</span> llm.generate(prompt, scenes=14)
-    scene_prompts = <span class="kw">await</span> synthesizer.expand(narrative)
-    images = <span class="kw">await</span> asyncio.gather(
-        *[diffusion.generate(p, style_token=FIXED_STYLE)
-          <span class="kw">for</span> p <span class="kw">in</span> scene_prompts]
-    )
-    <span class="kw">return</span> Story(narrative, images, <span class="kw">await</span> tts.generate(narrative))
-    <span class="cm"># Total: ~30-40 seconds</span>` },
-            { type: 'h4', text: 'Style Consistency' },
-            { type: 'p', text: 'Fixed style tokens — learned embeddings embedded into every diffusion call — ensured visual cohesion across all 10-14 generated scenes, the hardest unsolved challenge in multi-scene generation.' },
+                type: 'code', lang: 'Python', file: 'async_pipeline.py', code: `<span class="kw">async def</span> generate_story(prompt: str):
+    narrative_json = <span class="kw">await</span> llm.generate_structured_scenes(prompt)
+    <span class="cm"># Concurrent diffusion generation with fixed style embeddings</span>
+    image_tasks = [
+        flux_diffusion.generate(scene.prompt, style_token=FIXED_STYLE)
+        <span class="kw">for</span> scene <span class="kw">in</span> narrative_json.scenes
+    ]
+    images = <span class="kw">await</span> asyncio.gather(*image_tasks)
+    audio = <span class="kw">await</span> sarvam_tts.synthesize(narrative_json.full_script)
+    <span class="kw">return</span> Storyboard(images, audio) <span class="cm"># Total: &lt; 40s</span>` },
+            { type: 'h4', text: 'Key Takeaways' },
+            { type: 'ul', items: [
+                'Fixed style token embeddings solved character and scene visual divergence across 10-14 sequential story panels.',
+                'Async concurrent API scheduling reduced end-to-end generation latency from 110s down to <40s.',
+            ]},
         ],
-        metrics: { label: 'Generation Stats', items: [['Scene Count', '10-14', null], ['Generation Time', '30-40s', null], ['AI Components', '4+', null]] },
+        metrics: { label: 'Generation Telemetry', items: [['Scene Count', '10-14', null], ['Generation Latency', '<40s', null], ['AI Endpoints', '3 Services', null]] },
     },
-    datasculpt: {
-        tab: '📊 DataSculpt',
-        filename: 'datasculpt_analysis.py',
-        title: 'Post-Mortem: DataSculpt Analytics App',
-        meta: '📅 2025 · Data Analytics, Streamlit',
+    yellowsense: {
+        tab: '⚡ Distributed ETL',
+        filename: 'realtime_kafka_pipeline.py',
+        title: 'Yellowsense: Near Real-Time Kafka & Celery Ingestion',
+        meta: '📅 2026 · Data Engineering, Distributed Systems',
         content: [
-            { type: 'h4', text: 'Motivation' },
-            { type: 'p', text: 'Social media addiction is measurable behavior. DataSculpt was built to quantify it — analyzing 20+ user activity logs to surface hidden patterns in daily digital consumption.' },
+            { type: 'h4', text: 'High-Volume Financial Stream' },
+            { type: 'p', text: 'Ingesting, cleaning, and synchronizing multi-source banking APIs into normalized PostgreSQL analytical databases to power 6 XGBoost scoring models in real-time.' },
             {
-                type: 'code', lang: 'Python', file: 'data_pipeline.py', code: `<span class="kw">import</span> streamlit <span class="kw">as</span> st
-<span class="kw">import</span> pandas <span class="kw">as</span> pd
-df = pd.read_csv(<span class="str">"user_logs.csv"</span>, parse_dates=[<span class="str">"timestamp"</span>])
-daily_usage = df.groupby([<span class="str">"user_id"</span>, <span class="str">"date"</span>])[<span class="str">"duration"</span>].sum()
-peak_hours = df.groupby(<span class="str">"hour"</span>)[<span class="str">"duration"</span>].mean()
-st.metric(<span class="str">"Avg Daily Usage"</span>, f<span class="str">"{daily_usage.mean():.1f} hrs"</span>)` },
+                type: 'code', lang: 'Python', file: 'kafka_consumer.py', code: `@app.task(bind=<span class="kw">True</span>, max_retries=3)
+<span class="kw">def</span> process_banking_stream(self, payload):
+    clean_data = FinancialTransformer.normalize(payload)
+    cached = redis_client.get(clean_data.account_id)
+    <span class="kw">if not</span> cached:
+        postgres_db.upsert_transaction(clean_data)
+        redis_client.setex(clean_data.account_id, 3600, clean_data.hash)
+    <span class="kw">return</span> xgboost_model.predict_churn_risk(clean_data)` },
+            { type: 'h4', text: 'Production Outcomes' },
+            { type: 'ul', items: [
+                'Sub-second analytical queries achieved via Redis LRU cache buffering.',
+                'Automated document OCR + LangChain pipeline cut manual KYC audit turnaround time by 70%.',
+            ]},
         ],
-        metrics: { label: 'Data Stats', items: [['User Logs Analyzed', '20+', null], ['Engagement Trend Accuracy', 'High', null]] },
+        metrics: { label: 'Data Stats', items: [['KYC Automation', '70%', 70], ['Supervised ML Models', '6 Deployed', null], ['Pipeline Latency', '<1.2s', null]] },
     },
 }
 
@@ -97,10 +121,37 @@ function SimLog({ postId }) {
     const [running, setRunning] = useState(false)
 
     const LOGS = {
-        blackbox: ['Initializing CNN encoder...', 'Loading NASA C-MAPSS dataset...', 'Training epoch 1/50: loss=0.842', 'Training epoch 25/50: loss=0.312', 'Running SHAP analysis on test set...', 'R² Score: 0.848 ✓', 'RMSE: 14.60 ✓', 'Simulation complete.'],
-        exprai: ['Loading DenseNet201 weights...', 'Applying transfer learning...', 'Epoch 50/50: val_acc=0.9482', 'Running confidence calibration...', 'Test Accuracy: 94.82% ✓', 'Simulation complete.'],
-        mythra: ['Connecting to LLM API...', 'Generating narrative (14 scenes)...', 'Synthesizing scene prompts...', 'Generating images (async)...', 'Synthesizing TTS audio...', 'Story generated in 34.2s ✓', 'Simulation complete.'],
-        datasculpt: ['Loading user_logs.csv...', 'Processing 20+ activity logs...', 'Computing daily aggregates...', 'Rendering Streamlit dashboard...', 'Analysis complete ✓'],
+        biometric: [
+            'Loading YOLOv8 hand detector weights...',
+            'Evaluating U²-Net segmentation mask (IoU: 0.92)...',
+            'Applying Zero-DCE illumination enhancement...',
+            'Computing 3D spatial liveness on 21 landmarks...',
+            'Calculating Minutiae EER: 0.012 ✓',
+            'UIDAI SITAA Stage 2 Validation: PASS ✓'
+        ],
+        blackbox: [
+            'Initializing CNN-Transformer-BiLSTM model...',
+            'Loading NASA C-MAPSS 21-sensor test suite...',
+            'Calculating SHAP attribution values for Sensor 11...',
+            'Running Integrated Gradients temporal attribution...',
+            'R² Score: 0.848 | RMSE: 14.60 ✓',
+            'Model interpretability report generated ✓'
+        ],
+        mythra: [
+            'Prompt received: "Ancient temple in cyberpunk neon rain"',
+            'LLM parsed structured JSON (14 scenes)...',
+            'Dispatching asynchronous FLUX.1 diffusion workers...',
+            'Sarvam AI Regional Neural TTS synthesized...',
+            'Storyboard rendered in 34.2s ✓'
+        ],
+        yellowsense: [
+            'Connecting to Kafka banking broker stream...',
+            'Ingesting multi-source financial payload...',
+            'Celery worker executing OCR extraction...',
+            'Redis cache hit: latency 42ms...',
+            'PostgreSQL normalized upsert complete ✓',
+            'XGBoost scoring executed in 12ms ✓'
+        ],
     }
 
     const runSim = () => {
@@ -119,7 +170,7 @@ function SimLog({ postId }) {
     return (
         <div className="sim-section">
             <button className="run-sim-btn" onClick={runSim} disabled={running}>
-                {running ? '⏳ Running...' : '▶ Run Simulation'}
+                {running ? '⏳ Executing Pipeline...' : '▶ Execute Live Pipeline Simulation'}
             </button>
             {lines.length > 0 && (
                 <div className="sim-log">
@@ -162,7 +213,7 @@ function MetricsSidebar({ metrics }) {
 }
 
 export default function Blog() {
-    const [active, setActive] = useState('blackbox')
+    const [active, setActive] = useState('biometric')
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
     const post = POSTS[active]
 
@@ -176,9 +227,9 @@ export default function Blog() {
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
                 >
-                    <span className="section-tag">// training_logs.py --verbose</span>
-                    <h2 className="section-title">Training Logs</h2>
-                    <p className="section-desc">Deep-dive post-mortems: metrics, insights, and lessons learned</p>
+                    <span className="section-tag">// engineering_logs.py --verbose</span>
+                    <h2 className="section-title">Research &amp; Engineering Logs</h2>
+                    <p className="section-desc">Deep-dive technical post-mortems on biometric vision, explainable AI, multimodal architectures, and distributed data systems.</p>
                 </motion.div>
 
                 <div className="blog-tabs">

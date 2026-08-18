@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FileText, Sparkles } from 'lucide-react'
 import VGALogo from './VGALogo'
 import './Navbar.css'
 
@@ -8,11 +9,11 @@ const links = [
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
-    { id: 'blog', label: 'Training Logs' },
+    { id: 'blog', label: 'Research Logs' },
     { id: 'contact', label: 'Contact' },
 ]
 
-export default function Navbar({ activeSection }) {
+export default function Navbar({ activeSection, onOpenResume }) {
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -36,7 +37,7 @@ export default function Navbar({ activeSection }) {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
             >
                 <div className="nav-container">
-                    <button className="nav-logo" onClick={() => scrollTo('hero')}>
+                    <button className="nav-logo" onClick={() => scrollTo('hero')} aria-label="Go to top">
                         <VGALogo className="nav-logo-svg" />
                     </button>
 
@@ -56,16 +57,34 @@ export default function Navbar({ activeSection }) {
                         ))}
                     </ul>
 
-                    <motion.button
-                        className="btn-primary nav-cta"
-                        onClick={() => scrollTo('contact')}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Hire Me
-                    </motion.button>
+                    <div className="nav-actions">
+                        <motion.button
+                            className="btn-ghost nav-resume-btn"
+                            onClick={onOpenResume}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            title="View ATS-Optimized Resume & PDF Exporter"
+                        >
+                            <FileText size={15} className="text-neon" />
+                            <span>Resume</span>
+                            <span className="nav-resume-badge">ATS</span>
+                        </motion.button>
 
-                    <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+                        <motion.button
+                            className="btn-primary nav-cta"
+                            onClick={() => scrollTo('contact')}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <span>Let's Talk</span>
+                        </motion.button>
+                    </div>
+
+                    <button 
+                        className={`hamburger ${menuOpen ? 'open' : ''}`} 
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle Navigation Menu"
+                    >
                         <span /><span /><span />
                     </button>
                 </div>
@@ -85,6 +104,16 @@ export default function Navbar({ activeSection }) {
                                 {l.label}
                             </button>
                         ))}
+                        <div className="mobile-actions">
+                            <button 
+                                className="btn-ghost" 
+                                style={{ width: '100%', justifyContent: 'center' }}
+                                onClick={() => { setMenuOpen(false); onOpenResume(); }}
+                            >
+                                <FileText size={16} className="text-neon" />
+                                <span>View Resume (ATS &amp; PDF)</span>
+                            </button>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

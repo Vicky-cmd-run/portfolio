@@ -1,0 +1,181 @@
+%-------------------------
+% Vignesh G A - Modern & Premium ATS Resume
+% LaTeX Template (Jake / Modern Clean Style)
+%-------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins for standard 1-page fit
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.2in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \scshape Vignesh G A} \\ \vspace{2pt}
+    \small Amaravati, Andhra Pradesh ~ \textbar\ ~
+    \raisebox{-0.2\height}\faPhone\ +91-9025559798 ~ \textbar\ ~
+    \raisebox{-0.1\height}\faEnvelope\ \href{mailto:vigneshgnanasekaran8@gmail.com}{\underline{vigneshgnanasekaran8@gmail.com}} \\ \vspace{2pt}
+    \raisebox{-0.2\height}\faLinkedin\ \href{https://linkedin.com/in/vignesh-ga}{\underline{linkedin.com/in/vignesh-ga}} ~ \textbar\ ~
+    \raisebox{-0.2\height}\faGithub\ \href{https://github.com/vicky-cmd-run}{\underline{github.com/vicky-cmd-run}} ~ \textbar\ ~
+    \href{https://vigneshga.vercel.app}{\underline{vigneshga.vercel.app}}
+    \vspace{-6pt}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {VIT-AP University}{Amaravati, AP}
+      {Bachelor of Technology in Computer Science and Engineering (CGPA: 8.81)}{2023 -- 2027}
+    \resumeSubheading
+      {IIT Ropar $\times$ Masai}{Remote}
+      {Minor in Artificial Intelligence (AI \& Analytics)}{2025 -- 2026}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Internships / Professional Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Yellowsense}{May 2026 -- Aug 2026}
+      {Data \& ML Analyst Intern}{Fintech Predictive Analytics}
+      \resumeItemListStart
+        \resumeItem{\textbf{Predictive Analytics \& Modeling:} Developed 6 supervised machine learning models (lead scoring, churn risk, and account health) using scikit-learn and XGBoost, enabling data-driven client segmentation and operational decisions.}
+        \resumeItem{\textbf{ETL Pipeline Architecture:} Designed near real-time data pipelines leveraging \textbf{Kafka, Celery, and Redis} to ingest, clean, and synchronize multi-source banking APIs into normalized PostgreSQL analytical databases.}
+        \resumeItem{\textbf{Workflow Automation:} Built an automated document extraction pipeline using OCR and LLM APIs (\textbf{LangChain}), reducing manual KYC review turnaround time by \textbf{70\%}.}
+        \resumeItem{\textbf{Exploratory Data Analysis:} Performed cohort feature engineering on high-volume activity logs to power dashboards.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Taizo.in}{May 2025 -- Jun 2025}
+      {Frontend Software Engineer Intern}{B2B Manufacturing Platform}
+      \resumeItemListStart
+        \resumeItem{\textbf{Web Performance Optimization:} Built and deployed 5+ production modules using \textbf{React.js}, optimizing UI render cycles and improving web responsiveness by \textbf{30\%} across devices.}
+        \resumeItem{\textbf{Analytics Dashboards:} Developed 4 interactive recruitment dashboards with real-time data filtering and drill-down visualization, increasing platform engagement by \textbf{25\%}.}
+        \resumeItem{\textbf{Form Validation \& Security:} Integrated client-side validations and role-based access checks for enterprise candidate workflows.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Academic \& Technical Projects}
+    \resumeSubHeadingListStart
+      
+      \resumeProjectHeading
+          {\textbf{Contactless Biometric AI Suite} \textbar\ \emph{Python, PyTorch, YOLO, OpenCV, U$^2$-Net, MediaPipe}}{\textbf{National Qualifier}}
+          \resumeItemListStart
+            \resumeItem{\textbf{Vision Pipeline:} Built a computer vision pipeline combining YOLO for hand detection, $U^2$-Net for finger segmentation, and Zero-DCE/CLAHE enhancement for variable illumination conditions.}
+            \resumeItem{\textbf{Liveness \& Verification:} Implemented presentation attack detection using PyTorch CNNs and MediaPipe 3D gesture tracking; extracted minutiae maps to evaluate Equal Error Rate (EER) metrics.}
+            \resumeItem{\textbf{National Recognition:} Qualified for Stage 2 of the national \textbf{UIDAI SITAA AI biometric innovation cohort}.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Explainable Predictive Maintenance (NASA C-MAPSS)} \textbar\ \emph{Python, TensorFlow, Transformers, SHAP}}{Lead Researcher}
+          \resumeItemListStart
+            \resumeItem{\textbf{Multivariate Modeling:} Formulated degradation trends across 21 noisy sensor channels; trained a joint \textbf{CNN--Transformer--BiLSTM} model achieving \textbf{RMSE = 14.60} and \textbf{$R^2 = 0.848$}.}
+            \resumeItem{\textbf{Model Explainability (XAI):} Applied SHAP and Integrated Gradients to calculate sensor-level and temporal feature attributions, identifying key degradation indicators.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{MYTHRA -- Multimodal Storytelling Platform} \textbar\ \emph{Python, LangChain, FLUX.1, Sarvam AI, Streamlit}}{System Architect}
+          \resumeItemListStart
+            \resumeItem{\textbf{Multimodal Orchestration:} Connected LLMs for narrative structuring, FLUX.1 diffusion for scene generation, and Sarvam AI neural TTS for regional voiceover synthesis under $<40$s generation latency.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{NEXUS -- Financial Reconciliation Platform} \textbar\ \emph{FastAPI, React.js, PostgreSQL, Docker, Redis}}{Full-Stack Developer}
+          \resumeItemListStart
+            \resumeItem{Engineered rule-based matching algorithms processing 500+ line-items with \textbf{95\% accuracy}, reducing audit turnaround by \textbf{80\%} with Redis LRU caching.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills \& Competencies}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages:}{ Python, SQL, C++, JavaScript, C, R} \\
+     \textbf{Machine Learning \& Deep Learning:}{ PyTorch, TensorFlow, scikit-learn, XGBoost, OpenCV, Time-Series Modeling, Transformers, SHAP (XAI), YOLO, $U^2$-Net, MediaPipe} \\
+     \textbf{Data Engineering \& Web:}{ FastAPI, React.js, PostgreSQL, Redis, Kafka, Celery, RESTful API Design, Docker, Linux, Git, LangChain, Streamlit} \\
+     \textbf{Core Foundations:}{ Data Structures \& Algorithms, DBMS, Operating Systems, OOP}
+    }}
+ \end{itemize}
+ \vspace{-12pt}
+
+%-----------HONORS-----------
+\section{Academic Achievements \& Positions of Responsibility}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     $\bullet$ \textbf{UIDAI SITAA National Biometric Challenge:} Qualified for Stage 2 in the national biometric AI challenge organized by UIDAI. \\
+     $\bullet$ \textbf{Project Team Lead:} Led a 4-member multidisciplinary engineering team across computer vision pipeline development. \\
+     $\bullet$ \textbf{Student Project Mentor (AI/ML):} Supervised junior undergraduate teams on data preprocessing, model selection, and debugging. \\
+     $\bullet$ \textbf{NPTEL Elite Certification:} Awarded Elite status in Deep Learning certification.
+    }}
+ \end{itemize}
+
+\end{document}

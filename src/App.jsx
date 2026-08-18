@@ -8,10 +8,12 @@ import Blog from './components/Blog'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import NeuralCanvas from './components/NeuralCanvas'
+import ResumeModal from './components/ResumeModal'
 import './App.css'
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
+  const [resumeOpen, setResumeOpen] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,16 +34,17 @@ function App() {
   return (
     <div className="app">
       <NeuralCanvas />
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} onOpenResume={() => setResumeOpen(true)} />
       <main>
-        <Hero />
+        <Hero onOpenResume={() => setResumeOpen(true)} />
         <About />
         <Projects />
         <Experience />
         <Blog />
         <Contact />
       </main>
-      <Footer />
+      <Footer onOpenResume={() => setResumeOpen(true)} />
+      <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
     </div>
   )
 }

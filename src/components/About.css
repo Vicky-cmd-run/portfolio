@@ -1,30 +1,37 @@
 .section-header {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 26px;
 }
 
 .card-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     color: var(--neon);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    font-weight: 700;
 }
 
 /* Profile Card */
 .about-profile-card {
     grid-column: 1 / -1;
     border-radius: var(--radius);
-    padding: 32px;
+    padding: 34px;
     display: flex;
     gap: 32px;
     align-items: center;
+    background: var(--bg-surface);
+    box-shadow: var(--neuro-flat);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .profile-avatar {
@@ -34,93 +41,105 @@
 
 .avatar-glow {
     position: absolute;
-    inset: -8px;
+    inset: -6px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, var(--neon), var(--purple), var(--neon));
-    animation: spin 4s linear infinite;
-    opacity: 0.4;
+    background: conic-gradient(from 0deg, #0284c7, #6366f1, #0284c7);
+    animation: spin 6s linear infinite;
+    opacity: 0.35;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 .avatar-letters {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--neon), var(--purple));
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    border: 2px solid rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-mono);
     font-size: 1.5rem;
     font-weight: 800;
-    color: #000;
+    color: #0284c7;
     z-index: 1;
 }
 
 .profile-info h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.45rem;
+    font-weight: 800;
     margin-bottom: 4px;
+    color: var(--text);
 }
 
 .profile-role {
-    margin-bottom: 16px;
-    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0284c7;
+}
+
+.profile-bio {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+    line-height: 1.6;
+    max-width: 780px;
 }
 
 .profile-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .profile-chip {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    font-weight: 500;
     transition: all 0.2s;
 }
 
 .chip-icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.chip-icon svg {
-    width: 16px;
-    height: 16px;
+    color: var(--neon);
 }
 
 .profile-chip:hover {
     color: var(--neon);
-    border-color: rgba(0, 242, 255, 0.3);
+    box-shadow: var(--neuro-pressed-sm);
+    transform: translateY(1px);
 }
 
 /* Education */
 .edu-card {
     border-radius: var(--radius);
-    padding: 28px;
+    padding: 30px;
+    background: var(--bg-surface);
+    box-shadow: var(--neuro-flat);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .edu-item {
     display: flex;
     gap: 16px;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .edu-item:last-child {
@@ -128,30 +147,28 @@
 }
 
 .edu-icon {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--neon);
-    opacity: 0.85;
-    padding-top: 2px;
-}
-
-.edu-icon svg {
-    width: 28px;
-    height: 28px;
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .edu-text h4 {
-    font-size: 1rem;
+    font-size: 1.02rem;
     font-weight: 700;
     margin-bottom: 4px;
+    color: var(--text);
 }
 
 .edu-text p {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     color: var(--text-muted);
     margin-bottom: 8px;
 }
@@ -163,61 +180,105 @@
 }
 
 .edu-chip {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     padding: 3px 10px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    color: var(--text-dim);
+    background: var(--bg-sunken);
+    box-shadow: var(--neuro-pressed-sm);
+    color: var(--text-muted);
+    font-weight: 500;
 }
 
 .edu-chip.gpa {
-    border-color: rgba(0, 242, 255, 0.2);
-    color: var(--neon);
-    background: rgba(0, 242, 255, 0.05);
+    color: #0284c7;
+    font-weight: 700;
 }
 
-/* Certifications */
+.edu-sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(184, 197, 214, 0.4);
+}
+
+.edu-mini-badge {
+    padding: 10px 14px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.emb-label {
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.emb-val {
+    font-family: var(--font-mono);
+    color: var(--neon);
+    font-weight: 700;
+}
+
+/* Certifications & Honors */
 .cert-card {
     border-radius: var(--radius);
-    padding: 28px;
+    padding: 30px;
+    background: var(--bg-surface);
+    box-shadow: var(--neuro-flat);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.honors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .cert-item {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 12px;
+    transition: background 0.2s;
 }
 
-.cert-item:last-child {
-    margin-bottom: 0;
+.cert-item:hover {
+    background: var(--bg-sunken);
+    box-shadow: var(--neuro-pressed-sm);
 }
 
 .cert-icon {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--neon);
-}
-
-.cert-icon svg {
-    width: 28px;
-    height: 28px;
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .cert-name {
     font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 3px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--text);
 }
 
 .cert-issuer {
     font-size: 0.76rem;
     color: var(--text-muted);
+    line-height: 1.35;
 }
 
 .cert-badge {
@@ -226,43 +287,48 @@
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.72rem;
-    font-weight: 600;
-    background: rgba(0, 242, 255, 0.1);
-    color: var(--neon);
-    border: 1px solid rgba(0, 242, 255, 0.2);
+    font-weight: 700;
+    background: var(--bg);
+    box-shadow: var(--neuro-flat-sm);
+    color: #0284c7;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    font-family: var(--font-mono);
 }
 
 .cert-badge.elite {
-    background: rgba(112, 0, 255, 0.1);
-    color: #b47aff;
-    border-color: rgba(112, 0, 255, 0.2);
+    color: #6366f1;
+    background: var(--bg);
 }
 
 /* Skills */
 .skills-card {
     border-radius: var(--radius);
-    padding: 28px;
+    padding: 30px;
+    background: var(--bg-surface);
+    box-shadow: var(--neuro-flat);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 22px;
 }
 
 .skill-cat h5 {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .skill-tags-wrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 @media (max-width: 768px) {
@@ -280,6 +346,10 @@
     }
 
     .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edu-sub-grid {
         grid-template-columns: 1fr;
     }
 }

@@ -1,50 +1,75 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { Database, Layout, ArrowUpRight, Cpu, Layers, ShieldCheck, Zap } from 'lucide-react'
 import './Experience.css'
 
-const RocketIcon = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2l6-6-3-3-6 6z" />
-        <path d="M12 15l-3-3 8.5-8.5a2.12 2.12 0 013 3L12 15z" />
-        <path d="M20 7l-1-1M12 20v-2M17 17h-2M7 7L5 5" />
-    </svg>
-)
-const ChartIcon = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" />
-        <line x1="6" y1="20" x2="6" y2="14" /><line x1="2" y1="20" x2="22" y2="20" />
-    </svg>
-)
-const ShieldIcon = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M9 12l2 2 4-4" />
-    </svg>
-)
-
-const achievements = [
+const experiences = [
     {
-        icon: <RocketIcon />,
-        metric: '30%',
-        text: 'Engineered 5+ web application modules using React.js and Material UI, improving page responsiveness by 30% and boosting user retention across devices.',
-        showBar: true,
+        id: 'yellowsense',
+        role: 'Data & ML Analyst Intern',
+        company: 'Yellowsense',
+        period: 'May 2026 – Aug 2026',
+        type: 'Internship',
+        summary: 'Fintech analytics provider delivering predictive decision intelligence and automated KYC pipelines for financial institutions.',
+        tech: ['Python', 'XGBoost', 'scikit-learn', 'Kafka', 'Celery', 'Redis', 'PostgreSQL', 'LangChain', 'OCR'],
+        achievements: [
+            {
+                label: 'Predictive Analytics & Modeling',
+                metric: '6 Models',
+                text: 'Developed 6 supervised machine learning models (lead scoring, churn risk, and account health) using scikit-learn and XGBoost, enabling data-driven client segmentation and automated risk scoring.',
+                bar: 85,
+            },
+            {
+                label: 'ETL Pipeline Architecture',
+                metric: 'Real-Time',
+                text: 'Designed near real-time data ingestion pipelines leveraging Kafka, Celery, and Redis to ingest, clean, and synchronize multi-source banking APIs into normalized PostgreSQL analytical databases.',
+                bar: 92,
+            },
+            {
+                label: 'Workflow Automation',
+                metric: '70% Faster',
+                text: 'Built an automated document extraction pipeline using OCR and LLM APIs (LangChain), reducing manual KYC review turnaround time by 70%.',
+                bar: 70,
+            },
+        ],
+        pipelineNodes: ['Multi-Source APIs', 'Kafka Stream', 'Celery Workers', 'PostgreSQL', 'XGBoost Scoring'],
     },
     {
-        icon: <ChartIcon />,
-        metric: '+25pts',
-        text: 'Orchestrated the construction of 4 interactive dashboards featuring real-time data visualization and intuitive drill-down capabilities, enhancing user engagement by 25 points.',
-        showBar: false,
-    },
-    {
-        icon: <ShieldIcon />,
-        metric: null,
-        text: 'Implemented secure authentication features with form validation to ensure data integrity and optimize the user experience.',
-        showBar: false,
+        id: 'taizo',
+        role: 'Frontend Software Engineer Intern',
+        company: 'Taizo.in',
+        period: 'May 2025 – Jun 2025',
+        type: 'Internship',
+        summary: 'B2B manufacturing recruitment platform connecting enterprise employers with verified industrial talent.',
+        tech: ['React.js', 'Material UI', 'JavaScript', 'RESTful APIs', 'JWT Auth', 'Performance Optimization'],
+        achievements: [
+            {
+                label: 'Web Performance Optimization',
+                metric: '+30% Speed',
+                text: 'Built and deployed 5+ production modules using React.js, optimizing UI render cycles and improving web responsiveness by 30% across devices.',
+                bar: 30,
+            },
+            {
+                label: 'Interactive Dashboards',
+                metric: '+25 Pts',
+                text: 'Developed 4 interactive recruitment dashboards featuring real-time data filtering and drill-down visualization, increasing platform engagement by 25 points.',
+                bar: 65,
+            },
+            {
+                label: 'Form Validation & Security',
+                metric: 'Enterprise',
+                text: 'Integrated client-side validations and role-based access checks for enterprise candidate registration workflows.',
+                bar: null,
+            },
+        ],
+        pipelineNodes: ['React Components', 'Virtual DOM Diff', 'Material UI', 'Secure JWT Flow'],
     },
 ]
 
 export default function Experience() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+    const [activeTab, setActiveTab] = useState('yellowsense')
 
     return (
         <section id="experience">
@@ -56,75 +81,102 @@ export default function Experience() {
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.6 }}
                 >
-                    <span className="section-tag">// experience.json</span>
+                    <span className="section-tag">// career_trajectory.log</span>
                     <h2 className="section-title">Work Experience</h2>
+                    <p className="section-desc">Production engineering in predictive machine learning, high-throughput ETL pipelines, and scalable enterprise frontends.</p>
                 </motion.div>
 
-                <div className="timeline">
-                    <div className="tl-line" />
-                    <motion.div
-                        className="tl-item"
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.7, delay: 0.2 }}
-                    >
-                        <div className="tl-dot">
-                            <motion.div
-                                className="tl-dot-inner"
-                                animate={{ scale: [1, 1.3, 1] }}
-                                transition={{ repeat: Infinity, duration: 2 }}
-                            />
-                        </div>
-                        <div className="tl-card glass-neon">
-                            <div className="tl-header">
+                <div className="exp-tab-nav">
+                    {experiences.map(e => (
+                        <button
+                            key={e.id}
+                            className={`exp-nav-btn ${activeTab === e.id ? 'active' : ''}`}
+                            onClick={() => setActiveTab(e.id)}
+                        >
+                            <div className="exp-btn-dot" />
+                            <div className="exp-btn-text">
+                                <span className="exp-btn-company">{e.company}</span>
+                                <span className="exp-btn-role">{e.role}</span>
+                            </div>
+                            <span className="exp-btn-date">{e.period}</span>
+                        </button>
+                    ))}
+                </div>
+
+                <div className="exp-showcase">
+                    {experiences.filter(e => e.id === activeTab).map(exp => (
+                        <motion.div
+                            key={exp.id}
+                            className="exp-card glass-neon"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.4 }}
+                        >
+                            <div className="exp-header">
                                 <div>
-                                    <h3 className="tl-company">Taizo.in</h3>
-                                    <p className="tl-role">Frontend Development Intern</p>
+                                    <div className="exp-subhead">
+                                        <span className="exp-company-tag">{exp.company}</span>
+                                        <span className="exp-type-badge">{exp.type}</span>
+                                    </div>
+                                    <h3 className="exp-title">{exp.role}</h3>
                                 </div>
-                                <div className="tl-meta">
-                                    <span className="tl-badge">Remote</span>
-                                    <span className="tl-date">May 2025 – Jun 2025</span>
-                                </div>
+                                <div className="exp-date-pill">{exp.period}</div>
                             </div>
 
-                            <div className="tl-achievements">
-                                {achievements.map((a, i) => (
-                                    <motion.div
-                                        key={i}
-                                        className="ach-item"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                                        transition={{ delay: 0.3 + i * 0.15 }}
-                                    >
-                                        <div className="ach-icon">{a.icon}</div>
-                                        <div className="ach-content">
-                                            {a.metric && <span className="ach-metric">{a.metric}</span>}
-                                            <p>{a.text}</p>
-                                            {a.showBar && (
-                                                <div className="ach-bar-wrap">
-                                                    <div className="ach-bar-track">
-                                                        <motion.div
-                                                            className="ach-bar-fill"
-                                                            initial={{ width: 0 }}
-                                                            animate={inView ? { width: '30%' } : {}}
-                                                            transition={{ duration: 1.2, delay: 0.6 }}
-                                                        />
-                                                    </div>
-                                                    <span className="ach-bar-label">30% Improvement</span>
-                                                </div>
-                                            )}
+                            <p className="exp-desc">{exp.summary}</p>
+
+                            {/* PIPELINE VISUALIZER */}
+                            <div className="exp-pipeline-wrap glass">
+                                <div className="pipe-header">
+                                    <Layers size={14} className="text-neon" />
+                                    <span>System Architecture Flow</span>
+                                </div>
+                                <div className="pipe-flow">
+                                    {exp.pipelineNodes.map((node, i) => (
+                                        <div key={node} className="pipe-node-group">
+                                            <div className="pipe-node">
+                                                <span>{node}</span>
+                                            </div>
+                                            {i < exp.pipelineNodes.length - 1 && <span className="pipe-arrow">&rarr;</span>}
                                         </div>
-                                    </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* ACHIEVEMENTS */}
+                            <div className="exp-achievements-list">
+                                {exp.achievements.map((ach, i) => (
+                                    <div key={i} className="exp-ach-item glass">
+                                        <div className="ach-top">
+                                            <span className="ach-label">{ach.label}</span>
+                                            <span className="ach-badge text-neon">{ach.metric}</span>
+                                        </div>
+                                        <p className="ach-text">{ach.text}</p>
+                                        {ach.bar && (
+                                            <div className="metric-bar" style={{ marginTop: '8px' }}>
+                                                <motion.div
+                                                    className="metric-fill"
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: `${ach.bar}%` }}
+                                                    transition={{ duration: 0.8, delay: i * 0.15 }}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
 
-                            <div className="tl-tech">
-                                {['React.js', 'Material UI', 'Data Visualization', 'Authentication'].map(t => (
-                                    <span key={t} className="skill-tag">{t}</span>
-                                ))}
+                            {/* TECH PILLS */}
+                            <div className="exp-tech-footer">
+                                <span className="exp-tech-label">Tech Stack:</span>
+                                <div className="exp-tech-tags">
+                                    {exp.tech.map(t => (
+                                        <span key={t} className="skill-tag neon">{t}</span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
